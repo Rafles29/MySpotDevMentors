@@ -1,3 +1,23 @@
-@url = http://localhost:500
+@url = http://localhost:5000
 
-GET {{url}}/WeatherForecast
+###
+GET {{url}}/reservations
+
+###
+POST {{url}}/reservations
+Content-Type: application/json
+
+{
+    "parkingSpotName": "P2",
+    "employeeName": "Joe Doe",
+    "licencePlate": "XYZ"
+}
+
+###
+GET {{url}}/reservations/1
+
+###
+PUT {{url}}/reservations/1
+
+###
+DELETE {{url}}/reservations/1
