@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Models;
+using MySpot.Api.Commands;
+using MySpot.Api.DTO;
 using MySpot.Api.Services;
 
 namespace MySpot.Api.Controllers;
@@ -9,36 +10,36 @@ namespace MySpot.Api.Controllers;
 public class ReservationsController : ControllerBase
 {
     private readonly ReservationService _service = new();
-    
+
     [HttpGet]
-    public ActionResult<ICollection<Reservation>> GetAll()
+    public ActionResult<ICollection<ReservationDto>> GetAll()
     {
-        return Ok(_service.GetAll());
+        return Ok(_service.GetAllWeekly());
     }
-    
-    [HttpGet("{id:int}", Name = "GetReservation")]
-    public ActionResult<Reservation> GetReservation(int id)
+
+    [HttpGet("{id:guid}", Name = "GetReservation")]
+    public ActionResult<ReservationDto> GetReservation(Guid id)
     {
         var reservation = _service.Get(id);
         return reservation is null ? NotFound() : Ok(reservation);
     }
 
     [HttpPost]
-    public ActionResult Post([FromBody] Reservation reservation)
+    public ActionResult Post([FromBody] CreateReservation command)
     {
-        var id = _service.Create(reservation);
+        var id = _service.Create(command with { ReservationId = Guid.NewGuid() });
+
         if (id is null)
             return BadRequest();
 
         return CreatedAtAction(nameof(GetReservation), new { id }, default);
     }
-    
 
-    [HttpPut("{id:int}")]
-    public ActionResult Put(int id, Reservation reservation)
+
+    [HttpPut("{id:guid}")]
+    public ActionResult Put(Guid id, ChangeReservationLicencePlate command)
     {
-        reservation.Id = id;
-        var succeeded = _service.Update(reservation);
+        var succeeded = _service.Update(command with { ReservationId = id });
 
         if (!succeeded)
             return BadRequest($"The reservation with id ({id}) does not exist");
@@ -46,10 +47,10 @@ public class ReservationsController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id:int}")]
-    public ActionResult Delete(int id)
+    [HttpDelete("{id:guid}")]
+    public ActionResult Delete(Guid id)
     {
-        var succeeded = _service.Delete(id);
+        var succeeded = _service.Delete(new DeleteReservation(ReservationId: id));
 
         if (!succeeded)
             return BadRequest($"The reservation with id ({id}) does not exist");
