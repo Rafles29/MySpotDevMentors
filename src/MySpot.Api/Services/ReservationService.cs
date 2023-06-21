@@ -9,15 +9,15 @@ public class ReservationService
     private static WeeklyParkingSpot[] _weeklyParkingSpots =
     {
         new(Guid.Parse("00000000-0000-0000-0000-000000000001"), DateTime.UtcNow.AddDays(-1),
-            DateTime.UtcNow.AddDays(5), "P1"),
+            new Clock().Current().Date.AddDays(5), "P1"),
         new(Guid.Parse("00000000-0000-0000-0000-000000000002"), DateTime.UtcNow.AddDays(-1),
-            DateTime.UtcNow.AddDays(5), "P2"),
+            new Clock().Current().Date.AddDays(5), "P2"),
         new(Guid.Parse("00000000-0000-0000-0000-000000000003"), DateTime.UtcNow.AddDays(-1),
-            DateTime.UtcNow.AddDays(5), "P3"),
+            new Clock().Current().Date.AddDays(5), "P3"),
         new(Guid.Parse("00000000-0000-0000-0000-000000000004"), DateTime.UtcNow.AddDays(-1),
-            DateTime.UtcNow.AddDays(5), "P4"),
+            new Clock().Current().Date.AddDays(5), "P4"),
         new(Guid.Parse("00000000-0000-0000-0000-000000000005"), DateTime.UtcNow.AddDays(-1),
-            DateTime.UtcNow.AddDays(5), "P5"),
+            new Clock().Current().Date.AddDays(5), "P5"),
     };
 
     public IEnumerable<ReservationDto> GetAllWeekly() => _weeklyParkingSpots.SelectMany(x => x.Reservations).Select(x =>
@@ -43,7 +43,7 @@ public class ReservationService
 
         var reservation = new Reservation(reservationId, employeeName, licencePlate, date);
 
-        weeklyParkingSpot.AddReservation(reservation);
+        weeklyParkingSpot.AddReservation(reservation, new Clock().Current().Date);
         return reservation.Id;
     }
 
