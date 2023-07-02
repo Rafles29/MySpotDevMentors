@@ -1,10 +1,11 @@
-﻿using MySpot.Api.Commands;
-using MySpot.Api.DTO;
+﻿using MySpot.ApApplicationi.Commands;
 using MySpot.Api.Entities;
 using MySpot.Api.Repositories;
 using MySpot.Api.ValueObjects;
+using MySpot.Application.Commands;
+using MySpot.Application.DTO;
 
-namespace MySpot.Api.Services;
+namespace MySpot.Application.Services;
 
 public class ReservationService : IReservationService
 {

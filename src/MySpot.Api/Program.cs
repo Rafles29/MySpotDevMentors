@@ -1,7 +1,10 @@
-using MySpot.Api.Entities;
 using MySpot.Api.Repositories;
-using MySpot.Api.Services;
-using MySpot.Api.ValueObjects;
+using MySpot.Application;
+using MySpot.Application.Services;
+using MySpot.Core;
+using MySpot.Infrastructure;
+using MySpot.Infrastructure.Repositories;
+using MySpot.Infrastructure.Time;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 //     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services
-    .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
-    .AddSingleton<IReservationService, ReservationService>()
-    .AddSingleton<IClock, Clock>()
+    .AddCore()
+    .AddApplication()
+    .AddInfrastructure()
     .AddControllers();
 
 var app = builder.Build();

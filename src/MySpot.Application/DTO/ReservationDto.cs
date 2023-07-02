@@ -1,4 +1,4 @@
-﻿namespace MySpot.Api.DTO;
+﻿namespace MySpot.Application.DTO;
 
 public class ReservationDto
 {

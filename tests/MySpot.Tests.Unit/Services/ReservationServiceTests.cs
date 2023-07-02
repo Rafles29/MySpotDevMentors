@@ -1,9 +1,7 @@
-﻿using MySpot.Api.Commands;
-using MySpot.Api.Entities;
-using MySpot.Api.Exceptions;
-using MySpot.Api.Repositories;
-using MySpot.Api.Services;
-using MySpot.Api.ValueObjects;
+﻿using MySpot.Api.Exceptions;
+using MySpot.Application.Commands;
+using MySpot.Application.Services;
+using MySpot.Infrastructure.Repositories;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;
 

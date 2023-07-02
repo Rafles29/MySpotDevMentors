@@ -1,10 +1,11 @@
 ﻿using MySpot.Api.Entities;
-using MySpot.Api.Services;
+using MySpot.Api.Repositories;
 using MySpot.Api.ValueObjects;
+using MySpot.Application.Services;
 
-namespace MySpot.Api.Repositories;
+namespace MySpot.Infrastructure.Repositories;
 
-public class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
+internal sealed class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
 {
     private readonly List<WeeklyParkingSpot> _weeklyParkingSpots;
 
