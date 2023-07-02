@@ -7,16 +7,25 @@ namespace MySpot.Api.Services;
 
 public class ReservationService
 {
-    private static WeeklyParkingSpot[] _weeklyParkingSpots =
-    {
-        new(Guid.Parse("00000000-0000-0000-0000-000000000001"), new Week(CurrentDate()), "P1"),
-        new(Guid.Parse("00000000-0000-0000-0000-000000000002"), new Week(CurrentDate()), "P2"),
-        new(Guid.Parse("00000000-0000-0000-0000-000000000003"), new Week(CurrentDate()), "P3"),
-        new(Guid.Parse("00000000-0000-0000-0000-000000000004"), new Week(CurrentDate()), "P4"),
-        new(Guid.Parse("00000000-0000-0000-0000-000000000005"), new Week(CurrentDate()), "P5"),
-    };
+    private readonly IClock _clock;
 
-    private static DateTimeOffset CurrentDate() => new Clock().Current();
+    private readonly IEnumerable<WeeklyParkingSpot> _weeklyParkingSpots;
+    // private static WeeklyParkingSpot[] _weeklyParkingSpots =
+    // {
+    //     new(Guid.Parse("00000000-0000-0000-0000-000000000001"), new Week(CurrentDate()), "P1"),
+    //     new(Guid.Parse("00000000-0000-0000-0000-000000000002"), new Week(CurrentDate()), "P2"),
+    //     new(Guid.Parse("00000000-0000-0000-0000-000000000003"), new Week(CurrentDate()), "P3"),
+    //     new(Guid.Parse("00000000-0000-0000-0000-000000000004"), new Week(CurrentDate()), "P4"),
+    //     new(Guid.Parse("00000000-0000-0000-0000-000000000005"), new Week(CurrentDate()), "P5"),
+    // };
+
+    public ReservationService(IClock clock, IEnumerable<WeeklyParkingSpot> weeklyParkingSpots)
+    {
+        _clock = clock;
+        _weeklyParkingSpots = weeklyParkingSpots;
+    }
+
+    private DateTimeOffset CurrentDate() => _clock.Current();
 
     public IEnumerable<ReservationDto> GetAllWeekly() => _weeklyParkingSpots.SelectMany(x => x.Reservations).Select(x =>
         new ReservationDto
