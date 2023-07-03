@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MySpot.Api.Repositories;
 using MySpot.Infrastructure.DAL.Repositories;
@@ -7,10 +8,12 @@ namespace MySpot.Infrastructure.DAL;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddPostgres(this IServiceCollection services)
+    private const string OptionsSectionName = "Postgres";
+    public static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
     {
-        const string connectionString = "Host=localhost;Port=5432;Database=MySpot;Username=postgres;Password=";
-        services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(connectionString));
+        services.Configure<PostgresOptions>(configuration.GetRequiredSection(OptionsSectionName));
+        var postgresOptions = configuration.GetOptions<PostgresOptions>(OptionsSectionName);
+        services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(postgresOptions.ConnectionString));
         services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
         services.AddHostedService<DatabaseInitializer>();
 
