@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MySpot.Api.Repositories;
 using MySpot.Application.Services;
-using MySpot.Infrastructure.Repositories;
+using MySpot.Infrastructure.DAL;
+using MySpot.Infrastructure.DAL.Repositories;
 using MySpot.Infrastructure.Time;
 
 [assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
@@ -13,7 +14,8 @@ public static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         return services
-                .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
-                .AddSingleton<IClock, Clock>();
+            .AddPostgres()
+            // .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
+            .AddSingleton<IClock, Clock>();
     }
 }

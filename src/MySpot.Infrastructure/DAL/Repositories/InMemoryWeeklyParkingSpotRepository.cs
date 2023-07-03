@@ -3,7 +3,7 @@ using MySpot.Api.Repositories;
 using MySpot.Api.ValueObjects;
 using MySpot.Application.Services;
 
-namespace MySpot.Infrastructure.Repositories;
+namespace MySpot.Infrastructure.DAL.Repositories;
 
 internal sealed class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
 {
