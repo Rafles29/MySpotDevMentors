@@ -43,6 +43,7 @@ public class ReservationService : IReservationService
         var reservation = new Reservation(reservationId, employeeName, licencePlate, new Date(date));
 
         weeklyParkingSpot.AddReservation(reservation, CurrentDate());
+        _weeklyParkingSpotRepository.Update(weeklyParkingSpot);
         return reservation.Id;
     }
 

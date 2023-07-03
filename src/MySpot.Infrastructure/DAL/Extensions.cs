@@ -12,6 +12,7 @@ internal static class Extensions
         const string connectionString = "Host=localhost;Port=5432;Database=MySpot;Username=postgres;Password=";
         services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(connectionString));
         services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
+        services.AddHostedService<DatabaseInitializer>();
 
         return services;
     }
