@@ -1,9 +1,7 @@
-using MySpot.Api.Repositories;
 using MySpot.Application;
-using MySpot.Application.Services;
 using MySpot.Core;
 using MySpot.Infrastructure;
-using MySpot.Infrastructure.Time;
+using MySpot.Infrastructure.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +16,6 @@ builder.Services
     .AddControllers();
 
 var app = builder.Build();
-
-app.MapControllers();
+app.UseInfrastructure();
 
 app.Run();

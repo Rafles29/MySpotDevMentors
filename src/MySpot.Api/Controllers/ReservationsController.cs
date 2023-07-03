@@ -30,34 +30,23 @@ public class ReservationsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Post([FromBody] CreateReservation command)
     {
-        var id = await _reservationService.CreateAsync(command with { ReservationId = Guid.NewGuid() });
-
-        if (id is null)
-            return BadRequest();
-
-        return CreatedAtAction(nameof(GetReservation), new { id }, default);
+        command = command with { ReservationId = Guid.NewGuid() };
+        await _reservationService.CreateAsync(command);
+        return CreatedAtAction(nameof(GetReservation), new { id = command.ReservationId }, default);
     }
 
 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> Put(Guid id, ChangeReservationLicencePlate command)
     {
-        var succeeded = await _reservationService.UpdateAsync(command with { ReservationId = id });
-
-        if (!succeeded)
-            return BadRequest($"The reservation with id ({id}) does not exist");
-
+        await _reservationService.UpdateAsync(command with { ReservationId = id });
         return NoContent();
     }
 
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        var succeeded = await _reservationService.DeleteAsync(new DeleteReservation(ReservationId: id));
-
-        if (!succeeded)
-            return BadRequest($"The reservation with id ({id}) does not exist");
-
+        await _reservationService.DeleteAsync(new DeleteReservation(id));
         return NoContent();
     }
 }
