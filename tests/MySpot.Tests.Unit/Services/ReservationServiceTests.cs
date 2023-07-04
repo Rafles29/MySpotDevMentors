@@ -1,7 +1,7 @@
-﻿using MySpot.Api.Exceptions;
-using MySpot.Application.Commands;
+﻿using MySpot.Application.Commands;
 using MySpot.Application.Exception;
 using MySpot.Application.Services;
+using MySpot.Core.Exceptions;
 using MySpot.Infrastructure.DAL.Repositories;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;

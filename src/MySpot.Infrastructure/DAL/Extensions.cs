@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySpot.Api.Repositories;
+using MySpot.Core.Repositories;
 using MySpot.Infrastructure.DAL.Repositories;
 
 namespace MySpot.Infrastructure.DAL;

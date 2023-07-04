@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Http;
-using MySpot.Api.Exceptions;
+using MySpot.Core.Exceptions;
 
 namespace MySpot.Infrastructure.Exceptions;
 

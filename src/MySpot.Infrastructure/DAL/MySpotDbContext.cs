@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySpot.Api.Entities;
+using MySpot.Core.Entities;
 
 namespace MySpot.Infrastructure.DAL;
 

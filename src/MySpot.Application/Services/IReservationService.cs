@@ -1,5 +1,4 @@
-﻿using MySpot.ApApplicationi.Commands;
-using MySpot.Application.Commands;
+﻿using MySpot.Application.Commands;
 using MySpot.Application.DTO;
 
 namespace MySpot.Application.Services;

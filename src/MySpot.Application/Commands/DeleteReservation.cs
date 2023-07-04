@@ -1,3 +1,3 @@
-﻿namespace MySpot.ApApplicationi.Commands;
+﻿namespace MySpot.Application.Commands;
 
 public sealed record DeleteReservation(Guid ReservationId);
