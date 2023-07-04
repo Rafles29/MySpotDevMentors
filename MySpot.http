@@ -4,29 +4,27 @@
 GET {{url}}/reservations
 
 ###
-POST {{url}}/reservations
+POST {{url}}/reservations/vehicle
 Content-Type: application/json
 
 {
     "parkingSpotId": "00000000-0000-0000-0000-000000000001",
     "employeeName": "Joe Doe",
-    "licencePlate": "XYZ",
-    "date": "2023-06-21T15:31:05.671Z"
+    "licencePlate": "WI900GU",
+    "date": "2023-07-04T23:51:05.671Z"
 }
 
 ###
-GET {{url}}/reservations/1
+GET {{url}}/reservations/185509e7-84ee-4dea-a0b5-aa838b633aca
 
 ###
-PUT {{url}}/reservations/1
+PUT {{url}}/reservations/9351b04e-2fca-4f12-a509-6e377dc04361
 Content-Type: application/json
 
 {
-    "parkingSpotName": "P1",
-    "employeeName": "Joe Doe",
-    "licencePlate": "ABC"
+    "licencePlate": "ABC123"
 }
 
 
 ###
-DELETE {{url}}/reservations/2
+DELETE {{url}}/reservations/324c9dea-d35b-4f4b-80a1-29cc749804e8

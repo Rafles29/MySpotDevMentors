@@ -7,11 +7,10 @@ public sealed record Week
 
     public Week(DateTimeOffset value)
     {
-        var dayOfWeekNumber = (int)value.DayOfWeek;
-        var pastDays = -1 * dayOfWeekNumber;
-        var remainingDays = 7 - dayOfWeekNumber;
-        From = new(value.AddDays(pastDays));
-        To = new(value.AddDays(remainingDays));
+        var pastDays = value.DayOfWeek is DayOfWeek.Sunday ? 7 : (int) value.DayOfWeek;
+        var remainingDays = 7 - pastDays;
+        From = new Date(value.AddDays(-1 * pastDays));
+        To = new Date(value.AddDays(remainingDays));
     }
 
     public override string ToString() => $"{From} -> {To}";
