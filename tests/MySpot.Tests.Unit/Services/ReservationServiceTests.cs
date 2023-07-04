@@ -26,7 +26,7 @@ public class ReservationServiceTests
         ));
         
         var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
-            "Joe Doe", "ABC123", _clock.Current().AddDays(1));
+            "Joe Doe", "ABC123", 1, _clock.Current().AddDays(1));
 
         var exception = await Record.ExceptionAsync(() => _reservationService.ReserveForVehicleAsync(command));
 
@@ -44,7 +44,7 @@ public class ReservationServiceTests
         ));
         
         var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000010"), Guid.NewGuid(),
-            "Joe Doe", "ABC123", _clock.Current().AddDays(1));
+            "Joe Doe", "ABC123",1, _clock.Current().AddDays(1));
 
         var exception = await Record.ExceptionAsync(() => _reservationService.ReserveForVehicleAsync(command));
         exception.ShouldNotBeNull();
@@ -62,7 +62,7 @@ public class ReservationServiceTests
         ));
         
         var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
-            "Joe Doe", "ABC123", _clock.Current().AddDays(1));
+            "Joe Doe", "ABC123", 1,_clock.Current().AddDays(1));
         await _reservationService.ReserveForVehicleAsync(command);
         
         _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(

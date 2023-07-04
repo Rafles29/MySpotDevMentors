@@ -39,7 +39,7 @@ public class ReservationService : IReservationService
 
     public async Task ReserveForVehicleAsync(ReserveParkingSpotForVehicle command)
     {
-        var (spotId, reservationId, employeeName, licencePlate, date) = command;
+        var (spotId, reservationId, employeeName, licencePlate, capacity,  date) = command;
         var week = new Week(_clock.Current());
         var parkingSpotId = new ParkingSpotId(spotId);
         var weeklyParkingSpots = (await _weeklyParkingSpotRepository.GetByWeekAsync(week)).ToList();
@@ -50,7 +50,7 @@ public class ReservationService : IReservationService
             throw new WeeklyParkingSpotNotFoundException(spotId);
         }
 
-        var reservation = new VehicleReservation(reservationId, employeeName, licencePlate, new Date(date));
+        var reservation = new VehicleReservation(reservationId, employeeName, licencePlate, capacity, new Date(date));
 
         _parkingReservationService.ReserveSpotForVehicle(weeklyParkingSpots, JobTitle.Employee, parkingSpotToReserve,
             reservation);
