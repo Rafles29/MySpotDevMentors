@@ -1,7 +1,12 @@
-﻿using MySpot.Application.Commands;
+﻿using Moq;
+using MySpot.Application.Commands;
 using MySpot.Application.Exception;
 using MySpot.Application.Services;
+using MySpot.Core.Abstractions;
+using MySpot.Core.DomainServices;
+using MySpot.Core.Entities;
 using MySpot.Core.Exceptions;
+using MySpot.Core.ValueObjects;
 using MySpot.Infrastructure.DAL.Repositories;
 using MySpot.Tests.Unit.Shared;
 using Shouldly;
@@ -13,6 +18,13 @@ public class ReservationServiceTests
     [Fact]
     public async Task given_valid_command_create_should_add_reservation()
     {
+        _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(
+            It.IsAny<List<WeeklyParkingSpot>>(),
+            It.IsAny<JobTitle>(),
+            It.IsAny<WeeklyParkingSpot>(),
+            It.IsAny<Reservation>()
+        ));
+        
         var command = new CreateReservation(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
             "Joe Doe", "ABC123", _clock.Current().AddDays(1));
 
@@ -24,6 +36,13 @@ public class ReservationServiceTests
     [Fact]
     public async Task given_invalid_parking_spot_id_create_should_fail()
     {
+        _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(
+            It.IsAny<List<WeeklyParkingSpot>>(),
+            It.IsAny<JobTitle>(),
+            It.IsAny<WeeklyParkingSpot>(),
+            It.IsAny<Reservation>()
+        ));
+        
         var command = new CreateReservation(Guid.Parse("00000000-0000-0000-0000-000000000010"), Guid.NewGuid(),
             "Joe Doe", "ABC123", _clock.Current().AddDays(1));
 
@@ -35,11 +54,25 @@ public class ReservationServiceTests
     [Fact]
     public async Task given_reservation_for_already_taken_date_create_should_fail()
     {
+        _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(
+            It.IsAny<List<WeeklyParkingSpot>>(),
+            It.IsAny<JobTitle>(),
+            It.IsAny<WeeklyParkingSpot>(),
+            It.IsAny<Reservation>()
+        ));
+        
         var command = new CreateReservation(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
             "Joe Doe", "ABC123", _clock.Current().AddDays(1));
         await _reservationService.CreateAsync(command);
+        
+        _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(
+            It.IsAny<List<WeeklyParkingSpot>>(),
+            It.IsAny<JobTitle>(),
+            It.IsAny<WeeklyParkingSpot>(),
+            It.IsAny<Reservation>()
+        )).Throws(new ParkingSpotAlreadyReservedException("P1", _clock.Current().AddDays(1)));
 
-        var reservationId = await Record.ExceptionAsync( () => _reservationService.CreateAsync(command));
+        var reservationId = await Record.ExceptionAsync(() => _reservationService.CreateAsync(command));
 
         reservationId.ShouldNotBeNull();
         reservationId.ShouldBeOfType<ParkingSpotAlreadyReservedException>();
@@ -49,12 +82,19 @@ public class ReservationServiceTests
 
     private readonly IClock _clock;
     private readonly ReservationService _reservationService;
+    private readonly Mock<IParkingReservationService> _mockParkingReservationService;
 
     public ReservationServiceTests()
     {
         _clock = new TestClock();
         var weeklyParkingSpotRepository = new InMemoryWeeklyParkingSpotRepository(_clock);
-        _reservationService = new ReservationService(_clock, weeklyParkingSpotRepository);
+        _mockParkingReservationService = new Mock<IParkingReservationService>();
+
+        _reservationService = new ReservationService(
+            _clock,
+            weeklyParkingSpotRepository,
+            _mockParkingReservationService.Object
+        );
     }
 
     #endregion
