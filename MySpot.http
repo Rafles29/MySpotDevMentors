@@ -1,10 +1,10 @@
 @url = http://localhost:5000
 
 ###
-GET {{url}}/reservations
+GET {{url}}/parking-spots
 
 ###
-POST {{url}}/reservations/vehicle
+POST {{url}}/parking-spots/00000000-0000-0000-0000-000000000003/reservations/vehicle
 Content-Type: application/json
 
 {
@@ -12,22 +12,19 @@ Content-Type: application/json
     "capacity": 1,
     "employeeName": "Joe Doe",
     "licencePlate": "WI900GU",
-    "date": "2023-07-04T23:51:05.671Z"
+    "date": "2023-07-06T23:51:05.671Z"
 }
 
 ###
-POST {{url}}/reservations/cleaning
+POST {{url}}/parking-spots/reservations/cleaning
 Content-Type: application/json
 
 {
-    "date": "2023-07-04T23:51:05.671Z"
+    "date": "2023-07-06T23:51:05.671Z"
 }
 
 ###
-GET {{url}}/reservations/185509e7-84ee-4dea-a0b5-aa838b633aca
-
-###
-PUT {{url}}/reservations/9351b04e-2fca-4f12-a509-6e377dc04361
+PUT {{url}}/parking-spots/reservations/d8287c4a-cd1a-4d1c-bf4c-c4fc2fe7936b
 Content-Type: application/json
 
 {
@@ -36,4 +33,4 @@ Content-Type: application/json
 
 
 ###
-DELETE {{url}}/reservations/41324cdc-5230-4399-bf86-b4c47fe8ec45
+DELETE {{url}}/parking-spots/reservations/d8287c4a-cd1a-4d1c-bf4c-c4fc2fe7936b
