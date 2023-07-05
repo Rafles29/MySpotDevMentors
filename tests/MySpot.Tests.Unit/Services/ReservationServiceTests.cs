@@ -1,7 +1,8 @@
 ﻿using Moq;
+using MySpot.Application.Abstractions;
 using MySpot.Application.Commands;
+using MySpot.Application.Commands.Handlers;
 using MySpot.Application.Exception;
-using MySpot.Application.Services;
 using MySpot.Core.Abstractions;
 using MySpot.Core.DomainServices;
 using MySpot.Core.Entities;
@@ -24,11 +25,12 @@ public class ReservationServiceTests
             It.IsAny<WeeklyParkingSpot>(),
             It.IsAny<VehicleReservation>()
         ));
-        
-        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
+
+        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"),
+            Guid.NewGuid(),
             "Joe Doe", "ABC123", 1, _clock.Current().AddDays(1));
 
-        var exception = await Record.ExceptionAsync(() => _reservationService.ReserveForVehicleAsync(command));
+        var exception = await Record.ExceptionAsync(() => _commandHandler.HandleAsync(command));
 
         exception.ShouldBeNull();
     }
@@ -42,11 +44,12 @@ public class ReservationServiceTests
             It.IsAny<WeeklyParkingSpot>(),
             It.IsAny<VehicleReservation>()
         ));
-        
-        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000010"), Guid.NewGuid(),
-            "Joe Doe", "ABC123",1, _clock.Current().AddDays(1));
 
-        var exception = await Record.ExceptionAsync(() => _reservationService.ReserveForVehicleAsync(command));
+        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000010"),
+            Guid.NewGuid(),
+            "Joe Doe", "ABC123", 1, _clock.Current().AddDays(1));
+
+        var exception = await Record.ExceptionAsync(() => _commandHandler.HandleAsync(command));
         exception.ShouldNotBeNull();
         exception.ShouldBeOfType<WeeklyParkingSpotNotFoundException>();
     }
@@ -60,11 +63,12 @@ public class ReservationServiceTests
             It.IsAny<WeeklyParkingSpot>(),
             It.IsAny<VehicleReservation>()
         ));
-        
-        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"), Guid.NewGuid(),
-            "Joe Doe", "ABC123", 1,_clock.Current().AddDays(1));
-        await _reservationService.ReserveForVehicleAsync(command);
-        
+
+        var command = new ReserveParkingSpotForVehicle(Guid.Parse("00000000-0000-0000-0000-000000000001"),
+            Guid.NewGuid(),
+            "Joe Doe", "ABC123", 1, _clock.Current().AddDays(1));
+        await _commandHandler.HandleAsync(command);
+
         _mockParkingReservationService.Setup(x => x.ReserveSpotForVehicle(
             It.IsAny<List<WeeklyParkingSpot>>(),
             It.IsAny<JobTitle>(),
@@ -72,7 +76,7 @@ public class ReservationServiceTests
             It.IsAny<VehicleReservation>()
         )).Throws(new ParkingSpotAlreadyReservedException("P1", _clock.Current().AddDays(1)));
 
-        var reservationId = await Record.ExceptionAsync(() => _reservationService.ReserveForVehicleAsync(command));
+        var reservationId = await Record.ExceptionAsync(() => _commandHandler.HandleAsync(command));
 
         reservationId.ShouldNotBeNull();
         reservationId.ShouldBeOfType<ParkingSpotAlreadyReservedException>();
@@ -81,7 +85,7 @@ public class ReservationServiceTests
     #region ARRANGE
 
     private readonly IClock _clock;
-    private readonly ReservationService _reservationService;
+    private readonly ICommandHandler<ReserveParkingSpotForVehicle> _commandHandler;
     private readonly Mock<IParkingReservationService> _mockParkingReservationService;
 
     public ReservationServiceTests()
@@ -90,10 +94,8 @@ public class ReservationServiceTests
         var weeklyParkingSpotRepository = new InMemoryWeeklyParkingSpotRepository(_clock);
         _mockParkingReservationService = new Mock<IParkingReservationService>();
 
-        _reservationService = new ReservationService(
-            _clock,
-            weeklyParkingSpotRepository,
-            _mockParkingReservationService.Object
+        _commandHandler = new ReserveParkingSpotForVehicleHandler(weeklyParkingSpotRepository,
+            _mockParkingReservationService.Object, _clock
         );
     }
 

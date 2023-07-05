@@ -1,3 +1,5 @@
-﻿namespace MySpot.Application.Commands;
+﻿using MySpot.Application.Abstractions;
 
-public sealed record ReserveParkingSpotForCleaning(DateTime Date);
+namespace MySpot.Application.Commands;
+
+public sealed record ReserveParkingSpotForCleaning(DateTime Date) : ICommand;

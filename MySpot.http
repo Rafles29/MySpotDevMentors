@@ -8,9 +8,18 @@ POST {{url}}/reservations/vehicle
 Content-Type: application/json
 
 {
-    "parkingSpotId": "00000000-0000-0000-0000-000000000001",
+    "parkingSpotId": "00000000-0000-0000-0000-000000000003",
+    "capacity": 1,
     "employeeName": "Joe Doe",
     "licencePlate": "WI900GU",
+    "date": "2023-07-04T23:51:05.671Z"
+}
+
+###
+POST {{url}}/reservations/cleaning
+Content-Type: application/json
+
+{
     "date": "2023-07-04T23:51:05.671Z"
 }
 
@@ -27,4 +36,4 @@ Content-Type: application/json
 
 
 ###
-DELETE {{url}}/reservations/324c9dea-d35b-4f4b-80a1-29cc749804e8
+DELETE {{url}}/reservations/41324cdc-5230-4399-bf86-b4c47fe8ec45
