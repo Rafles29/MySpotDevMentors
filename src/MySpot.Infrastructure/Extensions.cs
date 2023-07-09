@@ -6,6 +6,7 @@ using MySpot.Application.Abstractions;
 using MySpot.Core.Abstractions;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
+using MySpot.Infrastructure.Logging;
 using MySpot.Infrastructure.Time;
 
 [assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
@@ -19,6 +20,7 @@ public static class Extensions
         services.Configure<AppOptions>(configuration.GetRequiredSection("App"));
         services.AddSingleton<IClock, Clock>();
         services.AddPostgres(configuration);
+        services.AddCustomLogging();
         services.AddControllers();
         
         var infrastructureAssembly = typeof(AppOptions).Assembly;
