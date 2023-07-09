@@ -12,7 +12,7 @@ Content-Type: application/json
     "capacity": 1,
     "employeeName": "Joe Doe",
     "licencePlate": "WI900GU",
-    "date": "2023-07-06T23:51:05.671Z"
+    "date": "2023-07-09T23:51:05.671Z"
 }
 
 ###
@@ -20,7 +20,7 @@ POST {{url}}/parking-spots/reservations/cleaning
 Content-Type: application/json
 
 {
-    "date": "2023-07-06T23:51:05.671Z"
+    "date": "2023-07-09T23:51:05.671Z"
 }
 
 ###
