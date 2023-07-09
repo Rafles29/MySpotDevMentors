@@ -7,6 +7,7 @@ using MySpot.Core.Abstractions;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
 using MySpot.Infrastructure.Logging;
+using MySpot.Infrastructure.Security;
 using MySpot.Infrastructure.Time;
 
 [assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
@@ -24,6 +25,7 @@ public static class Extensions
         services.AddControllers();
         
         var infrastructureAssembly = typeof(AppOptions).Assembly;
+        services.AddSecurity();
 
         services.Scan(s => s.FromAssemblies(infrastructureAssembly)
             .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))

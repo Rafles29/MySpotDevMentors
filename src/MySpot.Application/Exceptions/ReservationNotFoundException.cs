@@ -1,6 +1,6 @@
 ﻿using MySpot.Core.Exceptions;
 
-namespace MySpot.Application.Exception;
+namespace MySpot.Application.Exceptions;
 
 public class ReservationNotFoundException : CustomException
 {

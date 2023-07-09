@@ -1,5 +1,5 @@
 ﻿using MySpot.Application.Abstractions;
-using MySpot.Application.Exception;
+using MySpot.Application.Exceptions;
 using MySpot.Core.Entities;
 using MySpot.Core.Repositories;
 using MySpot.Core.ValueObjects;
