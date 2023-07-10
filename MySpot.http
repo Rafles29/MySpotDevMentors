@@ -10,7 +10,7 @@ Content-Type: application/json
 {
     "parkingSpotId": "00000000-0000-0000-0000-000000000003",
     "capacity": 1,
-    "employeeName": "Joe Doe",
+    "userId": "54fb2073-5b27-4860-b51c-3ff66147fa73",
     "licencePlate": "WI900GU",
     "date": "2023-07-09T23:51:05.671Z"
 }
@@ -34,3 +34,41 @@ Content-Type: application/json
 
 ###
 DELETE {{url}}/parking-spots/reservations/d8287c4a-cd1a-4d1c-bf4c-c4fc2fe7936b
+
+
+###
+# @name sign_in
+POST {{url}}/users/sign-in
+Content-Type: application/json
+
+ {
+   "Email": "abc@gmail.com",
+   "Password": "Qwerty1!"
+ }
+
+###
+ @accessToken = {{sign_in.response.body.$.accessToken}}
+ 
+###
+POST {{url}}/users
+Content-Type: application/json
+
+ {
+   "Email": "abc@gmail.com",
+   "Username": "abc123",
+   "Password": "Qwerty1!",
+   "FullName": "abc def",
+   "Role": "user"
+ }
+
+###
+GET {{url}}/users
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{url}}/users/54fb2073-5b27-4860-b51c-3ff66147fa73
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{url}}/users/me
+Authorization: Bearer {{accessToken}}
