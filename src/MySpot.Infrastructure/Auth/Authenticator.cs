@@ -30,13 +30,14 @@ public class Authenticator : IAuthenticator
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public JwtDto CreateToken(Guid userId)
+    public JwtDto CreateToken(Guid userId, string role)
     {
         var now = _clock.Current();
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+            new Claim(ClaimTypes.Role, role),
         };
 
         var expires = now.Add(_expiry);

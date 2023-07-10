@@ -30,6 +30,7 @@ public class UsersController : ControllerBase
         _signInHandler = signInHandler;
     }
 
+    [Authorize(Policy = "is-admin")]
     [HttpGet("{userId:guid}")]
     public async Task<ActionResult<UserDto>> Get(Guid userId)
     {

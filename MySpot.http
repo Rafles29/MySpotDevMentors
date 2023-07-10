@@ -42,7 +42,7 @@ POST {{url}}/users/sign-in
 Content-Type: application/json
 
  {
-   "Email": "abc@gmail.com",
+   "Email": "abc2@gmail.com",
    "Password": "Qwerty1!"
  }
 
@@ -54,11 +54,11 @@ POST {{url}}/users
 Content-Type: application/json
 
  {
-   "Email": "abc@gmail.com",
-   "Username": "abc123",
+   "Email": "abc2@gmail.com",
+   "Username": "abc1223",
    "Password": "Qwerty1!",
-   "FullName": "abc def",
-   "Role": "user"
+   "FullName": "abc2 def",
+   "Role": "admin"
  }
 
 ###
