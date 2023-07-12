@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Application", "src\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Infrastructure", "src\MySpot.Infrastructure\MySpot.Infrastructure.csproj", "{4BDCBDA5-D4C2-4430-A0D2-110C15E0BABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Tests.Integration", "tests\MySpot.Tests.Integration\MySpot.Tests.Integration.csproj", "{A119A84A-5870-42C3-A8A6-0DF7B80106D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{F039C31E-2000-4ECE-BCE8-0D9183ABFDBB} = {08F70496-F110-48D8-AEAE-FE671884377C}
 		{F3D9739D-C33F-4228-BB9C-D31B361558A2} = {08F70496-F110-48D8-AEAE-FE671884377C}
 		{4BDCBDA5-D4C2-4430-A0D2-110C15E0BABD} = {08F70496-F110-48D8-AEAE-FE671884377C}
+		{A119A84A-5870-42C3-A8A6-0DF7B80106D0} = {B173AB61-A148-40D2-A25F-9F082AF7461A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{596D6868-F67D-4900-9B1F-6BE0072230B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +50,9 @@ Global
 		{4BDCBDA5-D4C2-4430-A0D2-110C15E0BABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BDCBDA5-D4C2-4430-A0D2-110C15E0BABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BDCBDA5-D4C2-4430-A0D2-110C15E0BABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A119A84A-5870-42C3-A8A6-0DF7B80106D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A119A84A-5870-42C3-A8A6-0DF7B80106D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A119A84A-5870-42C3-A8A6-0DF7B80106D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A119A84A-5870-42C3-A8A6-0DF7B80106D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

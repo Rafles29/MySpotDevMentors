@@ -23,5 +23,9 @@
       <ProjectReference Include="..\MySpot.Application\MySpot.Application.csproj" />
       <ProjectReference Include="..\MySpot.Infrastructure\MySpot.Infrastructure.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="MySpot.Tests.Integration" />
+    </ItemGroup>
 
 </Project>

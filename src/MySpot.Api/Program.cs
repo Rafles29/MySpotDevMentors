@@ -1,7 +1,6 @@
 using MySpot.Application;
 using MySpot.Core;
 using MySpot.Infrastructure;
-using MySpot.Infrastructure.Exceptions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

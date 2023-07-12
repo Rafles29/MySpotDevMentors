@@ -6,5 +6,10 @@
     &lt;TestId&gt;xUnit::7DA02DF2-C36B-46E0-901F-6826E8A7031D::net7.0::MySpot.Tests.Unit.Services.ReservationServiceTests.given_invalid_parking_spot_id_create_should_fail&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7DA02DF2-C36B-46E0-901F-6826E8A7031D::net7.0::MySpot.Tests.Unit.Services.ReservationServiceTests.given_reservation_for_already_taken_date_create_should_fail&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7DA02DF2-C36B-46E0-901F-6826E8A7031D::net7.0::MySpot.Tests.Unit.Services.ReservationServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A119A84A-5870-42C3-A8A6-0DF7B80106D0::net7.0::MySpot.Tests.Integration.Controllers.UsersController.GetUsers_ShouldReturnUsers&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A119A84A-5870-42C3-A8A6-0DF7B80106D0::net7.0::MySpot.Tests.Integration.Controllers.UsersController&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A119A84A-5870-42C3-A8A6-0DF7B80106D0::net7.0::MySpot.Tests.Integration.Controllers.UsersControllerTest.SignUp_ShouldReturn204&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A119A84A-5870-42C3-A8A6-0DF7B80106D0::net7.0::MySpot.Tests.Integration.Controllers.UsersControllerTest.SignUp_ShouldReturn201&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A119A84A-5870-42C3-A8A6-0DF7B80106D0::net7.0::MySpot.Tests.Integration.Controllers.UsersControllerTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
